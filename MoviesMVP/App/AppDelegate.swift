@@ -11,10 +11,14 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var dataFetcherService: DataFetcherService?
+    var  dataFetcher = NetworkDataFetcher()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        dataFetcherService = DataFetcherService(networkDataFetcher: dataFetcher)
+        dataFetcherService?.fetchBestFilms(pageNumber: "1", completion: { result in
+            print(result)
+        })
         return true
     }
 
