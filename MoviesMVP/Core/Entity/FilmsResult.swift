@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - CategoriesResult
-struct FilmsResult: Codable {
+struct FilmsResult: Codable, Hashable {
     let pagesCount: Int
-    let films: [Film]
+    var films: [Film]
 }
 
 // MARK: - Film
-struct Film: Codable {
+struct Film: Codable, Hashable {
     let filmID: Int
     let nameRu: String
     let nameEn: String?
@@ -34,12 +34,11 @@ struct Film: Codable {
 }
 
 // MARK: - Country
-struct Country: Codable {
+struct Country: Codable, Hashable {
     let country: String
 }
 
 // MARK: - Genre
-struct Genre: Codable {
+struct Genre: Codable, Hashable {
     let genre: String
 }
-

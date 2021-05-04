@@ -31,7 +31,6 @@ class DataFetcherService {
             URLQueryItem(name: "page", value: pageNumber)
         ]
         guard let url = urlConstructor.url else { return }
-        print(url)
 
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }

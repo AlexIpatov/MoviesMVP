@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,17 @@
 		4A9234A126415AFE006D2569 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A92349E26415AFE006D2569 /* NetworkDataFetcher.swift */; };
 		4A9234A426415BE8006D2569 /* FilmsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234A326415BE8006D2569 /* FilmsResult.swift */; };
 		4A9234A626416469006D2569 /* DataFetcherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234A526416469006D2569 /* DataFetcherServiceTests.swift */; };
+		4A9234AD26416776006D2569 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234AC26416776006D2569 /* MainView.swift */; };
+		4A9234AF26416783006D2569 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234AE26416783006D2569 /* MainViewController.swift */; };
+		4A9234B126416A7E006D2569 /* MainVCFilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234B026416A7E006D2569 /* MainVCFilmCell.swift */; };
+		4A9234B626416AAD006D2569 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234B426416AAD006D2569 /* SelfConfiguringCell.swift */; };
+		4A9234B926416CA0006D2569 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234B826416CA0006D2569 /* UILabel+Extension.swift */; };
+		4A9234BB26416CDB006D2569 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234BA26416CDB006D2569 /* UIFont + Extensions.swift */; };
+		4A9234BD26416E37006D2569 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234BC26416E37006D2569 /* UIImageView+Extension.swift */; };
+		4A9234C026418AC1006D2569 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9234BF26418AC1006D2569 /* Kingfisher */; };
+		4A9234C326418C66006D2569 /* UIRefreshControl + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C226418C66006D2569 /* UIRefreshControl + Extension.swift */; };
+		4A9234C626419A9F006D2569 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C526419A9F006D2569 /* MainPresenter.swift */; };
+		4A9234C92641A70B006D2569 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C82641A70B006D2569 /* MainBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +68,16 @@
 		4A92349E26415AFE006D2569 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		4A9234A326415BE8006D2569 /* FilmsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsResult.swift; sourceTree = "<group>"; };
 		4A9234A526416469006D2569 /* DataFetcherServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetcherServiceTests.swift; sourceTree = "<group>"; };
+		4A9234AC26416776006D2569 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4A9234AE26416783006D2569 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4A9234B026416A7E006D2569 /* MainVCFilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCFilmCell.swift; sourceTree = "<group>"; };
+		4A9234B426416AAD006D2569 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
+		4A9234B826416CA0006D2569 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		4A9234BA26416CDB006D2569 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
+		4A9234BC26416E37006D2569 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		4A9234C226418C66006D2569 /* UIRefreshControl + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl + Extension.swift"; sourceTree = "<group>"; };
+		4A9234C526419A9F006D2569 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		4A9234C82641A70B006D2569 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A9234C026418AC1006D2569 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +163,7 @@
 		4A92349626414E3B006D2569 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				4A9234A7264166C0006D2569 /* MainViewController */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -148,6 +171,8 @@
 		4A92349726414E45006D2569 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4A9234B726416C77006D2569 /* Extensions */,
+				4A9234B226416AAD006D2569 /* Protocols */,
 				4A9234A226415B4C006D2569 /* Entity */,
 			);
 			path = Core;
@@ -196,6 +221,77 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		4A9234A7264166C0006D2569 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234C72641A6F3006D2569 /* Builder */,
+				4A9234A8264166D3006D2569 /* View */,
+				4A9234A9264166D8006D2569 /* Controller */,
+				4A9234AB2641675C006D2569 /* Cell */,
+				4A9234AA264166DE006D2569 /* Presenter */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		4A9234A8264166D3006D2569 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234AC26416776006D2569 /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A9234A9264166D8006D2569 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234AE26416783006D2569 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4A9234AA264166DE006D2569 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234C526419A9F006D2569 /* MainPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		4A9234AB2641675C006D2569 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234B026416A7E006D2569 /* MainVCFilmCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4A9234B226416AAD006D2569 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234B426416AAD006D2569 /* SelfConfiguringCell.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4A9234B726416C77006D2569 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234BA26416CDB006D2569 /* UIFont + Extensions.swift */,
+				4A9234B826416CA0006D2569 /* UILabel+Extension.swift */,
+				4A9234BC26416E37006D2569 /* UIImageView+Extension.swift */,
+				4A9234C226418C66006D2569 /* UIRefreshControl + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4A9234C72641A6F3006D2569 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				4A9234C82641A70B006D2569 /* MainBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,12 +302,16 @@
 				4A92345C26414AE0006D2569 /* Sources */,
 				4A92345D26414AE0006D2569 /* Frameworks */,
 				4A92345E26414AE0006D2569 /* Resources */,
+				4A9234C426419811006D2569 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MoviesMVP;
+			packageProductDependencies = (
+				4A9234BF26418AC1006D2569 /* Kingfisher */,
+			);
 			productName = MoviesMVP;
 			productReference = 4A92346026414AE0006D2569 /* MoviesMVP.app */;
 			productType = "com.apple.product-type.application";
@@ -283,6 +383,9 @@
 				Base,
 			);
 			mainGroup = 4A92345726414AE0006D2569;
+			packageReferences = (
+				4A9234BE26418AC1006D2569 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 4A92346126414AE0006D2569 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -320,18 +423,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A9234C426419811006D2569 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A92345C26414AE0006D2569 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4A9234A126415AFE006D2569 /* NetworkDataFetcher.swift in Sources */,
+				4A9234B126416A7E006D2569 /* MainVCFilmCell.swift in Sources */,
+				4A9234BD26416E37006D2569 /* UIImageView+Extension.swift in Sources */,
+				4A9234AD26416776006D2569 /* MainView.swift in Sources */,
 				4A9234A026415AFE006D2569 /* DataFetcherService.swift in Sources */,
 				4A92349F26415AFE006D2569 /* NetworkManager.swift in Sources */,
+				4A9234B626416AAD006D2569 /* SelfConfiguringCell.swift in Sources */,
 				4A92346E26414AE0006D2569 /* MoviesMVP.xcdatamodeld in Sources */,
 				4A92346426414AE0006D2569 /* AppDelegate.swift in Sources */,
+				4A9234B926416CA0006D2569 /* UILabel+Extension.swift in Sources */,
+				4A9234AF26416783006D2569 /* MainViewController.swift in Sources */,
+				4A9234C626419A9F006D2569 /* MainPresenter.swift in Sources */,
 				4A92346626414AE0006D2569 /* SceneDelegate.swift in Sources */,
+				4A9234C92641A70B006D2569 /* MainBuilder.swift in Sources */,
 				4A9234A426415BE8006D2569 /* FilmsResult.swift in Sources */,
+				4A9234BB26416CDB006D2569 /* UIFont + Extensions.swift in Sources */,
+				4A9234C326418C66006D2569 /* UIRefreshControl + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +790,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4A9234BE26418AC1006D2569 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4A9234BF26418AC1006D2569 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A9234BE26418AC1006D2569 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4A92346C26414AE0006D2569 /* MoviesMVP.xcdatamodeld */ = {
