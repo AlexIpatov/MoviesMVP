@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class MainVCFilmCell: UITableViewCell, SelfConfiguringCell {
+class MainVCFilmCell: UITableViewCell, SelfConfiguringView {
 
     // MARK: Cell ID
     static var reuseId: String = "MainVCFilmCell"

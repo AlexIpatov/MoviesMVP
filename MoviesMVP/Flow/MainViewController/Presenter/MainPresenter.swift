@@ -48,9 +48,9 @@ class MainPresenter {
             self.currentPage += 1
         }
     }
-
     private func openFilmDetails(with film: Film) {
-        print("openFilmDetails")
+       let detailVC = PosterViewController(film: film)
+        viewInput?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

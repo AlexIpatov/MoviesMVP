@@ -10,7 +10,6 @@ import XCTest
 class MoviesMVPUITests: XCTestCase {
 
     override func setUpWithError() throws {
-   
         continueAfterFailure = false
 
     }

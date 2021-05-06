@@ -22,8 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let dataFetcherService = dataFetcherService else {
             return
         }
-
-        window?.rootViewController = MainBuilder.build(dataFetcherService: dataFetcherService)
+        window?.rootViewController =  MainTabBarController(dataFetcherService: dataFetcherService)
         window?.makeKeyAndVisible()
     }
 

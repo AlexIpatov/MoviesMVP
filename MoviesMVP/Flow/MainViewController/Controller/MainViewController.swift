@@ -8,13 +8,10 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
-    private var currentPage = 1
     // MARK: View
     private lazy var mainView: MainView = {
         MainView()
     }()
-
     // MARK: Results from api
      var results = [Film]() {
         didSet {
@@ -45,7 +42,6 @@ class MainViewController: UIViewController {
     private func fetchData() {
         presenter.viewDidRequest()
     }
-
     // MARK: - Setup TableView
     private func setupTableView() {
         mainView.tableView.register(MainVCFilmCell.self,
@@ -54,7 +50,6 @@ class MainViewController: UIViewController {
         mainView.tableView.prefetchDataSource = self
         mainView.tableView.dataSource = self
     }
-
 }
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
@@ -87,6 +82,10 @@ extension MainViewController: UITableViewDataSourcePrefetching {
 
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentFilm = results[indexPath.row]
+        presenter.viewDidSelectFilm(currentFilm)
+    }
 
 }
 // MARK: - Actions
@@ -100,6 +99,7 @@ extension MainViewController {
         mainView.refreshControl.endRefreshing()
     }
 }
+// MARK: - MainViewInput
 extension MainViewController: MainViewInput {
     func showError() {
         print("error")

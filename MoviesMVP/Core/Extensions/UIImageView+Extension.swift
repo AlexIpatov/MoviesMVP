@@ -10,6 +10,7 @@ import UIKit
 extension UIImageView {
     convenience init(placeholderImageName: String) {
         self.init()
+        self.contentMode = .scaleAspectFill
         self.image = UIImage(named: placeholderImageName)
         self.translatesAutoresizingMaskIntoConstraints = false
     }
