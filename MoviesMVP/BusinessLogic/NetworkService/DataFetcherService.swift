@@ -28,12 +28,24 @@ class DataFetcherService {
             URLQueryItem(name: "page", value: pageNumber)
         ]
         guard let url = urlConstructor.url else { return }
-
+        print(#function)
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
+
     func fetchFilmById(id: String, completion: @escaping (DetailFilmResult?) -> Void) {
         urlConstructor.path = "/api/v2.1/films/\(id)"
         guard let url = urlConstructor.url else { return }
+        networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
+    }
+
+    func searchFilmByKeyword(keyword: String, pageNumber: String = "1", completion: @escaping (SearchFilmResult?) -> Void) {
+        urlConstructor.path = "/api/v2.1/films/search-by-keyword"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "keyword", value: keyword),
+            URLQueryItem(name: "page", value: pageNumber)
+        ]
+        guard let url = urlConstructor.url else { return }
+        print(#function)
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
 }

@@ -18,9 +18,7 @@ protocol DetailViewOutput: AnyObject {
 class DetailViewPresenter {
     weak var viewInput: (UIViewController & DetailViewInput)?
     private let transition = PanelTransition()
-    
     let dataFetcherService: DataFetcherService
-    
     init(dataFetcherService: DataFetcherService) {
         self.dataFetcherService = dataFetcherService
     }

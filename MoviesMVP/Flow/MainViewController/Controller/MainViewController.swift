@@ -18,6 +18,21 @@ class MainViewController: UIViewController {
             mainView.tableView.reloadData()
         }
     }
+    var searchResults = [Film]() {
+       didSet {
+         mainView.tableView.reloadData()
+       }
+   }
+    // MARK: - Search controller
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+          guard let text = searchController.searchBar.text else { return false }
+          return text.isEmpty
+      }
+      private var isFiltering: Bool {
+          return searchController.isActive && !searchBarIsEmpty
+      }
+    // MARK: - Presenter
     private let presenter: MainViewOutput
         // MARK: - Init
         init(presenter: MainViewOutput) {
@@ -35,6 +50,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupNavigationItems()
+        setupSearchController()
         fetchData()
         addTargets()
     }
@@ -42,6 +59,17 @@ class MainViewController: UIViewController {
     private func fetchData() {
         presenter.viewDidRequest()
     }
+    // MARK: - Setup navigation items
+    private func setupNavigationItems() {
+        navigationItem.searchController = searchController
+    }
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        definesPresentationContext = true
+    }
+
     // MARK: - Setup TableView
     private func setupTableView() {
         mainView.tableView.register(MainVCFilmCell.self,
@@ -54,12 +82,17 @@ class MainViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        results.count
+         isFiltering ? searchResults.count : results.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainVCFilmCell.reuseId,
                                                        for: indexPath) as? MainVCFilmCell else {return UITableViewCell()}
-        let film = results[indexPath.row]
+        let film: Film
+        if isFiltering {
+            film = searchResults[indexPath.row]
+        } else {
+            film = results[indexPath.row]
+        }
         cell.configure(with: film)
         return cell
     }
@@ -70,21 +103,46 @@ extension MainViewController: UITableViewDataSourcePrefetching {
         guard indexPaths.contains(where: isloadingCell(for:)) else {
             return
         }
-        presenter.viewDidRequestMoreFilms()
+        if isFiltering {
+            presenter.viewDidRequestMoreFilmsByCurrentKeyword()
+        } else {
+            presenter.viewDidRequestMoreFilms()
+        }
     }
     func isloadingCell(for indexPath: IndexPath) -> Bool {
-        let filmsCount = results.count
+        var filmsCount: Int
+        if isFiltering {
+      filmsCount = searchResults.count
+        } else {
+    filmsCount = results.count
+        }
         return indexPath.row == filmsCount - 3
     }
 }
+
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let currentFilm = results[indexPath.row]
+        let currentFilm: Film
+        if isFiltering {
+            currentFilm = searchResults[indexPath.row]
+        } else {
+            currentFilm = results[indexPath.row]
+        }
         presenter.viewDidSelectFilm(currentFilm)
     }
 }
+// MARK: - UISearchResultsUpdating
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text
+              else { return }
+            presenter.viewDidRequestFilmsByKeyword(keyword: text)
+    }
+
+}
+
 // MARK: - Actions
 extension MainViewController {
     func addTargets() {

@@ -39,6 +39,11 @@ class PosterViewController: UIViewController {
         presenter.viewDidRequest(filmId: film.filmID)
         setupFilmPoster()
         setupActions()
+        setupNavigationItems()
+    }
+    // MARK: - Setup navigation items
+    private func setupNavigationItems() {
+        navigationItem.title = film.nameRu
     }
     // MARK: - Setup film poster
     private func setupFilmPoster() {

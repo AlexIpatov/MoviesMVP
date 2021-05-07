@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A74F3232645412500DD850F /* SearchFilmResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A74F3222645412500DD850F /* SearchFilmResult.swift */; };
 		4A7538412642A21C0039BC1F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7538402642A21C0039BC1F /* MainTabBarController.swift */; };
 		4A92346426414AE0006D2569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A92346326414AE0006D2569 /* AppDelegate.swift */; };
 		4A92346626414AE0006D2569 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A92346526414AE0006D2569 /* SceneDelegate.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A74F3222645412500DD850F /* SearchFilmResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilmResult.swift; sourceTree = "<group>"; };
 		4A7538402642A21C0039BC1F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4A92346026414AE0006D2569 /* MoviesMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A92346326414AE0006D2569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			children = (
 				4A9234A326415BE8006D2569 /* FilmsResult.swift */,
 				4AAF4FD62643FB92002E9B27 /* DetailFilmResult.swift */,
+				4A74F3222645412500DD850F /* SearchFilmResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				4A9234B926416CA0006D2569 /* UILabel+Extension.swift in Sources */,
 				4A9234AF26416783006D2569 /* MainViewController.swift in Sources */,
 				4AAF4FD926440DA9002E9B27 /* UITextView + Extension.swift in Sources */,
+				4A74F3232645412500DD850F /* SearchFilmResult.swift in Sources */,
 				4A9234C626419A9F006D2569 /* MainPresenter.swift in Sources */,
 				4AAF4FC42643EDC3002E9B27 /* DismissAnimation.swift in Sources */,
 				4A92346626414AE0006D2569 /* SceneDelegate.swift in Sources */,

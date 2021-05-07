@@ -44,8 +44,8 @@ class MainVCFilmCell: UITableViewCell, SelfConfiguringView {
     func configure<U>(with value: U) where U : Hashable {
         guard let film: Film = value as? Film else { return }
         titleLabel.text = film.nameRu
-        yearLabel.text = "year: \(film.year)"
-        ratingLabel.text = "rating: \(film.rating)"
+        yearLabel.text = "year: \(film.year ?? "-")"
+        ratingLabel.text = "rating: \(film.rating ?? "-")"
         posterImageView.kf.setImage(with: URL(string: film.posterURLPreview))
     }
 }
