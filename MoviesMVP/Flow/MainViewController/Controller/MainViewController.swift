@@ -66,27 +66,24 @@ extension MainViewController: UITableViewDataSource {
 }
 // MARK: - UITableViewDataSourcePrefetching
 extension MainViewController: UITableViewDataSourcePrefetching {
-
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         guard indexPaths.contains(where: isloadingCell(for:)) else {
             return
         }
         presenter.viewDidRequestMoreFilms()
     }
-
     func isloadingCell(for indexPath: IndexPath) -> Bool {
         let filmsCount = results.count
         return indexPath.row == filmsCount - 3
     }
 }
-
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let currentFilm = results[indexPath.row]
         presenter.viewDidSelectFilm(currentFilm)
     }
-
 }
 // MARK: - Actions
 extension MainViewController {

@@ -8,24 +8,22 @@
 import UIKit
 
 class PosterViewController: UIViewController {
-
-    private var detailFilmInfo: DetailFilmResult? {
+    var detailFilmInfo: DetailFilmResult? {
         didSet {
-            openFilmInfoVC()
+            presenter.viewDidOpenFilmInfoVC(with: film)
         }
     }
-
     private var film: Film
     private let transition = PanelTransition()
-
     // MARK: View
     private lazy var posterView : PosterView = {
         PosterView()
     }()
-
+    private let presenter: DetailViewOutput
     // MARK: - Init
-    init(film: Film) {
+    init(presenter: DetailViewOutput, film: Film) {
         self.film = film
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -38,21 +36,24 @@ class PosterViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidRequest(filmId: film.filmID)
         setupFilmPoster()
-        DataFetcherService().fetchFilmById(id: String(film.filmID)) { [weak self] (result) in
-            self?.detailFilmInfo = result
-        }
+        setupActions()
     }
-    private func openFilmInfoVC() {
-        guard let detailFilmInfo = detailFilmInfo else { return }
-        let child = FilmInfoViewController(film: film, detailFilmInfo: detailFilmInfo)
-        child.transitioningDelegate = transition
-        child.modalPresentationStyle = .custom
-        present(child, animated: true)
-    }
-
     // MARK: - Setup film poster
     private func setupFilmPoster() {
         posterView.configure(with: film.posterURL)
+    }
+    private func setupActions() {
+        posterView.showVCButton.addTarget(self, action: #selector(showButtonTapped), for: .touchUpInside)
+    }
+    @objc private func showButtonTapped() {
+        presenter.viewDidOpenFilmInfoVC(with: film)
+    }
+}
+// MARK: - MainViewInput
+extension PosterViewController: DetailViewInput {
+    func showError() {
+        print("error")
     }
 }

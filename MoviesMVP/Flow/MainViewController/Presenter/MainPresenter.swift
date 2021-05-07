@@ -49,11 +49,10 @@ class MainPresenter {
         }
     }
     private func openFilmDetails(with film: Film) {
-       let detailVC = PosterViewController(film: film)
+        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService, with: film)
         viewInput?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
-
 extension MainPresenter: MainViewOutput {
     func viewDidRequest() {
         requestData()

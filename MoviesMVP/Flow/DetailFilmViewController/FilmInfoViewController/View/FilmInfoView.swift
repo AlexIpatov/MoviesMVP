@@ -21,14 +21,14 @@ class FilmInfoView: UIView, SelfConfiguringView {
     private lazy var countriesLabel = UILabel(textColor: .black,
                                               numberOfLines: 0,
                                               textAlignment: .center)
-    private var hideButton: UIButton = {
+    let hideButton: UIButton = {
         let button = UIButton()
         button.setTitle("Hide", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    lazy var descriptionTextVeiw = UITextView(text: "", font: .filmInfoDescriptionFont())
+    private lazy var descriptionTextVeiw = UITextView(text: "", font: .filmInfoDescriptionFont())
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -44,14 +44,13 @@ class FilmInfoView: UIView, SelfConfiguringView {
     func configure<U>(with value: U) where U : Hashable {
         if let film = value as? Film {
             ratingLabel.text = "KP: \(film.rating)"
-            yearLabel.text = "\(film.year) year"
+            yearLabel.text = film.year
             countriesLabel.text = film.countries.compactMap { $0.country }.joined(separator: ", ")
             genresLabel.text = film.genres.compactMap { $0.genre }.joined(separator: ", ")
         } else if let detailFilm = value as? DetailFilmResult {
             descriptionTextVeiw.text = detailFilm.data.dataDescription
         }
     }
-    
     // MARK: - Setup constraints
     private func setupConstraints() {
         addSubview(ratingLabel)
@@ -63,11 +62,11 @@ class FilmInfoView: UIView, SelfConfiguringView {
         NSLayoutConstraint.activate([
 
             yearLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            yearLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            yearLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             yearLabel.heightAnchor.constraint(equalToConstant: 30),
 
             ratingLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            ratingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            ratingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
             ratingLabel.heightAnchor.constraint(equalToConstant: 30),
 
             countriesLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),

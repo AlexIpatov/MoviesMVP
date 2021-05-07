@@ -33,6 +33,7 @@ class FilmInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFilmViews()
+        setupActions()
     }
 
     // MARK: - Setup film views
@@ -40,4 +41,13 @@ class FilmInfoViewController: UIViewController {
         filmInfoView.configure(with: film)
         filmInfoView.configure(with: detailFilmInfo)
     }
+
+    private func setupActions() {
+        filmInfoView.hideButton.addTarget(self, action: #selector(hideVC), for: .touchUpInside)
+    }
+
+    @objc private func hideVC() {
+        dismiss(animated: true, completion: nil)
+    }
+
 }
