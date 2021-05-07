@@ -7,39 +7,35 @@
 
 import Foundation
 
-// MARK: - CategoriesResult
-struct FilmsResult: Codable {
+struct FilmsResult: Codable, Hashable {
     let pagesCount: Int
-    let films: [Film]
+    var films: [Film]
 }
-
 // MARK: - Film
-struct Film: Codable {
+struct Film: Codable, Hashable {
     let filmID: Int
     let nameRu: String
     let nameEn: String?
-    let year, filmLength: String
+    let year, filmLength: String?
     let countries: [Country]
     let genres: [Genre]
-    let rating: String
-    let ratingVoteCount: Int
+    let rating: String?
     let posterURL, posterURLPreview: String
-
+    var detailFilmResult: DetailFilm?
     enum CodingKeys: String, CodingKey {
+        case detailFilmResult = "data"
         case filmID = "filmId"
-        case nameRu, nameEn, year, filmLength, countries, genres, rating, ratingVoteCount
+        case nameRu, nameEn, year, filmLength, countries, genres, rating
         case posterURL = "posterUrl"
         case posterURLPreview = "posterUrlPreview"
     }
 }
 
 // MARK: - Country
-struct Country: Codable {
+struct Country: Codable, Hashable {
     let country: String
 }
-
 // MARK: - Genre
-struct Genre: Codable {
+struct Genre: Codable, Hashable {
     let genre: String
 }
-
