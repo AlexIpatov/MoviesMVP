@@ -21,7 +21,8 @@ class DataFetcherService {
     init(networkDataFetcher: DataFetcher = NetworkDataFetcher()) {
         self.networkDataFetcher = networkDataFetcher
     }
-    func fetchBestFilms(pageNumber: String = "1", completion: @escaping (FilmsResult?) -> Void) {
+    func fetchBestFilms(pageNumber: String = "1",
+                        completion: @escaping (FilmsResult?) -> Void) {
         urlConstructor.path = "/api/v2.2/films/top"
         urlConstructor.queryItems = [
             URLQueryItem(name: "type", value: "TOP_250_BEST_FILMS"),
@@ -32,13 +33,16 @@ class DataFetcherService {
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
 
-    func fetchFilmById(id: String, completion: @escaping (DetailFilmResult?) -> Void) {
+    func fetchFilmById(id: String,
+                       completion: @escaping (DetailFilmResult?) -> Void) {
         urlConstructor.path = "/api/v2.1/films/\(id)"
         guard let url = urlConstructor.url else { return }
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
 
-    func searchFilmByKeyword(keyword: String, pageNumber: String = "1", completion: @escaping (SearchFilmResult?) -> Void) {
+    func searchFilmByKeyword(keyword: String,
+                             pageNumber: String = "1",
+                             completion: @escaping (SearchFilmResult?) -> Void) {
         urlConstructor.path = "/api/v2.1/films/search-by-keyword"
         urlConstructor.queryItems = [
             URLQueryItem(name: "keyword", value: keyword),

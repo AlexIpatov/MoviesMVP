@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var dataFetcherService: DataFetcherService?
     var dataFetcher = NetworkDataFetcher()
+    var coreDataService = CoreDataService()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -22,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let dataFetcherService = dataFetcherService else {
             return
         }
-        window?.rootViewController =  MainTabBarController(dataFetcherService: dataFetcherService)
+        window?.rootViewController =  MainTabBarController(dataFetcherService: dataFetcherService,
+                                                           coreDataService: coreDataService)
         window?.makeKeyAndVisible()
     }
 
@@ -46,11 +48,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-
-        // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        coreDataService.saveContext()
     }
 }

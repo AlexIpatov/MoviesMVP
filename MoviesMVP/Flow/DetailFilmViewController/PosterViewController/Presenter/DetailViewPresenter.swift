@@ -14,13 +14,22 @@ protocol DetailViewInput: AnyObject {
 protocol DetailViewOutput: AnyObject {
     func viewDidRequest(filmId: Int)
     func viewDidOpenFilmInfoVC(with film: Film)
+    func viewDidRequestToSaveFilm(film: Film)
 }
 class DetailViewPresenter {
     weak var viewInput: (UIViewController & DetailViewInput)?
     private let transition = PanelTransition()
-    let dataFetcherService: DataFetcherService
-    init(dataFetcherService: DataFetcherService) {
+
+    private let dataFetcherService: DataFetcherService
+    private let coreDataService: CoreDataService
+
+    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
+    }
+    // MARK: - save to CoreData
+    private func saveFilmToCoreData(film: Film) {
+        coreDataService.saveFilmToCoreData(film: film)
     }
     // MARK: - requestData
     private func requestData(filmId: Int) {
@@ -47,5 +56,8 @@ extension DetailViewPresenter: DetailViewOutput {
     }
     func viewDidRequest(filmId: Int) {
         requestData(filmId: filmId)
+    }
+    func viewDidRequestToSaveFilm(film: Film) {
+        saveFilmToCoreData(film: film)
     }
 }

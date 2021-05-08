@@ -43,11 +43,11 @@ class FilmInfoView: UIView, SelfConfiguringView {
     // MARK: - Configure
     func configure<U>(with value: U) where U : Hashable {
         if let film = value as? Film {
-            ratingLabel.text = "KP: \(film.rating)"
+            ratingLabel.text = "KP: \(film.rating ?? "-")"
             yearLabel.text = film.year
-            countriesLabel.text = film.countries.compactMap { $0.country }.joined(separator: ", ")
-            genresLabel.text = film.genres.compactMap { $0.genre }.joined(separator: ", ")
         } else if let detailFilm = value as? DetailFilmResult {
+            countriesLabel.text = detailFilm.data.countries?.compactMap { $0.country }.joined(separator: ", ")
+            genresLabel.text = detailFilm.data.genres?.compactMap { $0.genre }.joined(separator: ", ")
             descriptionTextVeiw.text = detailFilm.data.dataDescription
         }
     }

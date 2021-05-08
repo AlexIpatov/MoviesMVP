@@ -40,6 +40,7 @@ class PosterViewController: UIViewController {
         setupFilmPoster()
         setupActions()
         setupNavigationItems()
+        presenter.viewDidRequestToSaveFilm(film: film)
     }
     // MARK: - Setup navigation items
     private func setupNavigationItems() {

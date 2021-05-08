@@ -25,15 +25,19 @@ class MainPresenter {
     private var maxPageCount: Int = 0
     weak var viewInput: (UIViewController & MainViewInput)?
 
-    let dataFetcherService: DataFetcherService
+    private let dataFetcherService: DataFetcherService
+    private let coreDataService: CoreDataService
 
-    init(dataFetcherService: DataFetcherService) {
+    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
     }
 
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
-        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService, with: film)
+        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
+                                           coreDataService: coreDataService,
+                                           with: film)
         viewInput?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

@@ -7,12 +7,14 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
 
-    private var dataFetcherService: DataFetcherService
+    private let dataFetcherService: DataFetcherService
+    private let coreDataService: CoreDataService
     // MARK: - Init
-    init(dataFetcherService: DataFetcherService) {
+    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
         self.dataFetcherService = dataFetcherService
+        self.coreDataService = coreDataService
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -26,7 +28,8 @@ class MainTabBarController: UITabBarController {
     }
     // MARK: - Setup
     private func setupControllers() {
-        let mainViewController = MainBuilder.build(dataFetcherService: dataFetcherService)
+        let mainViewController = MainBuilder.build(dataFetcherService: dataFetcherService,
+                                                   coreDataService: coreDataService)
 
         viewControllers = [
             generateNavigationController(rootViewController: mainViewController,
