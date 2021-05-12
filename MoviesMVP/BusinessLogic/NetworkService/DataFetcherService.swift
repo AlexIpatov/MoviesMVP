@@ -22,14 +22,15 @@ class DataFetcherService {
         self.networkDataFetcher = networkDataFetcher
     }
     func fetchBestFilms(pageNumber: String = "1",
+                        type: TopFilmTypes = .best,
                         completion: @escaping (FilmsResult?) -> Void) {
         urlConstructor.path = "/api/v2.2/films/top"
         urlConstructor.queryItems = [
-            URLQueryItem(name: "type", value: "TOP_250_BEST_FILMS"),
+            URLQueryItem(name: "type", value: type.description()),
             URLQueryItem(name: "page", value: pageNumber)
         ]
         guard let url = urlConstructor.url else { return }
-        print(#function)
+        print(url)
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
 

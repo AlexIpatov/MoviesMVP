@@ -30,12 +30,19 @@ final class MainTabBarController: UITabBarController {
     private func setupControllers() {
         let mainViewController = MainBuilder.build(dataFetcherService: dataFetcherService,
                                                    coreDataService: coreDataService)
+        let savedFilmsViewController = SavedFilmsBuilder.build(dataFetcherService: dataFetcherService,
+                                                               coreDataService: coreDataService)
 
         viewControllers = [
             generateNavigationController(rootViewController: mainViewController,
                                          title: "films",
                                          image: UIImage(systemName: "square.grid.2x2.fill")!,
-                                         selectedImage:  UIImage(systemName: "square.grid.2x2.fill")!)
+                                         selectedImage: UIImage(systemName: "square.grid.2x2.fill")!),
+
+            generateNavigationController(rootViewController: savedFilmsViewController,
+                                         title: "savedFilms",
+                                         image:  UIImage(systemName: "square.grid.2x2.fill")!,
+                                         selectedImage: UIImage(systemName: "square.grid.2x2.fill")!)
         ]
     }
     private func generateNavigationController(rootViewController: UIViewController,

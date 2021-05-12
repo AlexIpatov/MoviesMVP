@@ -14,10 +14,13 @@ class PosterView: UIView, SelfConfiguringView {
     let showVCButton = UIButton(title: "show info",
                                 cornerRadius: 0,
                                 backgroundColor: .blue)
+    let addAndRemoveFilmButton = UIButton(title: "Add to my films",
+                                          cornerRadius: 0,
+                                          backgroundColor: .green)
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .brown
+        backgroundColor = .white
         setupConstraints()
     }
     required init?(coder: NSCoder) {
@@ -30,10 +33,16 @@ class PosterView: UIView, SelfConfiguringView {
     }
     // MARK: - Setup constraints
     private func setupConstraints() {
+        addSubview(addAndRemoveFilmButton)
         addSubview(posterView)
         addSubview(showVCButton)
         NSLayoutConstraint.activate([
-            posterView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            addAndRemoveFilmButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            addAndRemoveFilmButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            addAndRemoveFilmButton.widthAnchor.constraint(equalTo: widthAnchor),
+            addAndRemoveFilmButton.heightAnchor.constraint(equalToConstant: 40),
+
+            posterView.topAnchor.constraint(equalTo: addAndRemoveFilmButton.bottomAnchor),
             posterView.leftAnchor.constraint(equalTo: leftAnchor),
             posterView.rightAnchor.constraint(equalTo: rightAnchor),
             posterView.bottomAnchor.constraint(equalTo: showVCButton.topAnchor),
