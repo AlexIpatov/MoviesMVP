@@ -23,16 +23,16 @@ class MainPresenter {
     private var currentPage: Int = 2
     private var maxPageCount: Int = 0
     weak var viewInput: (UIViewController & MainViewInput)?
-
+    
     private let dataFetcherService: DataFetcherService
     private let coreDataService: CoreDataService
-
+    
     init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
-
+        
     }
-
+    
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
         let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
@@ -48,7 +48,7 @@ extension MainPresenter {
         dataFetcherService.searchFilmByKeyword(keyword: keyword) {[weak self] result in
             guard let self = self,
                   let result = result
-                  else {return}
+            else {return}
             self.viewInput?.searchResults = result.films
             self.maxPageCount = result.pagesCount
             print(result.pagesCount)
@@ -63,9 +63,9 @@ extension MainPresenter {
                   let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
-
+            
             self.viewInput?.searchResults += result.films
-
+            
             self.currentPage += 1
         }
     }
@@ -74,10 +74,10 @@ extension MainPresenter {
         dataFetcherService.fetchBestFilms { [weak self] result in
             guard let self = self,
                   let result = result
-                  else {return}
+            else {return}
             self.viewInput?.results = result.films
             self.maxPageCount = result.pagesCount
-            self.currentPage = 1
+            self.currentPage = 2
         }
     }
     // MARK: Request more page films
@@ -87,9 +87,9 @@ extension MainPresenter {
                   let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
-
+            
             self.viewInput?.results += result.films
-
+            
             self.currentPage += 1
         }
     }
