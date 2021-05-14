@@ -12,8 +12,11 @@ struct DetailFilmResult: Codable, Hashable {
 }
 // MARK: - DetailFilm
 struct DetailFilm: Codable, Hashable {
-    var  dataDescription: String?
+    var dataDescription: String?
+    let countries: [Country]?
+    let genres: [Genre]?
     enum CodingKeys: String, CodingKey {
         case dataDescription = "description"
+        case countries, genres
     }
 }

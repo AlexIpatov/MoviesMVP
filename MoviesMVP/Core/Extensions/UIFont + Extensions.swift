@@ -17,5 +17,4 @@ extension UIFont {
     static func filmInfoDescriptionFont() -> UIFont? {
         return UIFont.init(name: "Thonburi", size: 15)
     }
-
 }

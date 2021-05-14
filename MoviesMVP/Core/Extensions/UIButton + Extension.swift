@@ -26,4 +26,14 @@ extension UIButton {
         self.layer.shadowOpacity = 0.2
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
     }
+// MARK: Save button init
+    convenience init(image: UIImage?,
+                     cornerRadius: CGFloat,
+                     tintColor: UIColor = .white) {
+        self.init(type: .system)
+        self.setImage(image, for: .normal)
+        self.layer.cornerRadius = cornerRadius
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.tintColor = tintColor
+    }
 }

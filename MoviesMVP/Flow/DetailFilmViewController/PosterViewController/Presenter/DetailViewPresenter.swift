@@ -9,17 +9,22 @@ import UIKit
 
 protocol DetailViewInput: AnyObject {
     var detailFilmInfo: DetailFilmResult? {get set}
-    func showError()
 }
 protocol DetailViewOutput: AnyObject {
     func viewDidRequest(filmId: Int)
     func viewDidOpenFilmInfoVC(with film: Film)
 }
 class DetailViewPresenter {
-    weak var viewInput: (UIViewController & DetailViewInput)?
+    weak var viewInput: (PosterViewController & DetailViewInput)?
+
     private let transition = PanelTransition()
-    let dataFetcherService: DataFetcherService
-    init(dataFetcherService: DataFetcherService) {
+
+    private let dataFetcherService: DataFetcherService
+    private let coreDataService: CoreDataService
+
+    init(dataFetcherService: DataFetcherService,
+         coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
     }
     // MARK: - requestData
@@ -35,7 +40,9 @@ class DetailViewPresenter {
     private func openFilmInfoVC(with film: Film) {
         guard let detailFilmInfo = viewInput?.detailFilmInfo
         else { return }
-        let child = FilmInfoViewController(film: film, detailFilmInfo: detailFilmInfo)
+        let child = FilmInfoBuilder.build(coreDataService: coreDataService,
+                                          with: film,
+                                          with: detailFilmInfo)
         child.transitioningDelegate = transition
         child.modalPresentationStyle = .custom
         viewInput?.present(child, animated: true)

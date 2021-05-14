@@ -8,8 +8,9 @@
 import UIKit
 
 class MainBuilder {
-    static func build(dataFetcherService: DataFetcherService) -> (UIViewController & MainViewInput) {
-        let presenter = MainPresenter(dataFetcherService: dataFetcherService)
+    static func build(dataFetcherService: DataFetcherService,
+                      coreDataService: CoreDataService) -> (UIViewController & MainViewInput) {
+        let presenter = MainPresenter(dataFetcherService: dataFetcherService, coreDataService: coreDataService)
         let viewController = MainViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController

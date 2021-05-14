@@ -11,13 +11,14 @@ import Kingfisher
 class PosterView: UIView, SelfConfiguringView {
     // MARK: - Subviews
     private lazy var posterView = UIImageView(placeholderImageName: "")
-    let showVCButton = UIButton(title: "show info",
+    let showVCButton = UIButton(title: "Show info",
                                 cornerRadius: 0,
-                                backgroundColor: .blue)
+                                backgroundColor: .white,
+                                tintColor: .blue)
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .brown
+        backgroundColor = .white
         setupConstraints()
     }
     required init?(coder: NSCoder) {
@@ -33,16 +34,15 @@ class PosterView: UIView, SelfConfiguringView {
         addSubview(posterView)
         addSubview(showVCButton)
         NSLayoutConstraint.activate([
-            posterView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            posterView.leftAnchor.constraint(equalTo: leftAnchor),
-            posterView.rightAnchor.constraint(equalTo: rightAnchor),
+            posterView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            posterView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+            posterView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor),
             posterView.bottomAnchor.constraint(equalTo: showVCButton.topAnchor),
 
             showVCButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             showVCButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             showVCButton.widthAnchor.constraint(equalTo: widthAnchor),
             showVCButton.heightAnchor.constraint(equalToConstant: 40)
-
         ])
     }
 }

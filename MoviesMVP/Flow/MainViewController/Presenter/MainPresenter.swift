@@ -10,7 +10,6 @@ import UIKit
 protocol MainViewInput: AnyObject {
     var results: [Film] {get set}
     var searchResults: [Film] {get set}
-    func showError()
 }
 protocol MainViewOutput: AnyObject {
     func viewDidRequest()
@@ -21,19 +20,23 @@ protocol MainViewOutput: AnyObject {
 }
 class MainPresenter {
     private var currentKeyword: String?
-    private var currentPage: Int = 1
+    private var currentPage: Int = 2
     private var maxPageCount: Int = 0
     weak var viewInput: (UIViewController & MainViewInput)?
 
-    let dataFetcherService: DataFetcherService
+    private let dataFetcherService: DataFetcherService
+    private let coreDataService: CoreDataService
 
-    init(dataFetcherService: DataFetcherService) {
+    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
     }
 
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
-        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService, with: film)
+        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
+                                           coreDataService: coreDataService,
+                                           with: film)
         viewInput?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -44,12 +47,12 @@ extension MainPresenter {
         dataFetcherService.searchFilmByKeyword(keyword: keyword) {[weak self] result in
             guard let self = self,
                   let result = result
-                  else {return}
+            else {return}
             self.viewInput?.searchResults = result.films
             self.maxPageCount = result.pagesCount
             print(result.pagesCount)
             self.currentKeyword = result.keyword
-            self.currentPage = 1
+            self.currentPage = 2
         }
     }
     private func requestMoreFilmsByCurrentKeyword() {
@@ -70,10 +73,10 @@ extension MainPresenter {
         dataFetcherService.fetchBestFilms { [weak self] result in
             guard let self = self,
                   let result = result
-                  else {return}
+            else {return}
             self.viewInput?.results = result.films
             self.maxPageCount = result.pagesCount
-            self.currentPage = 1
+            self.currentPage = 2
         }
     }
     // MARK: Request more page films
@@ -90,7 +93,6 @@ extension MainPresenter {
         }
     }
 }
-
 extension MainPresenter: MainViewOutput {
     func viewDidRequest() {
         requestData()

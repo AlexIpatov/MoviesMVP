@@ -7,19 +7,27 @@
 
 import UIKit
 
-class FilmInfoViewController: UIViewController {
-
+class FilmInfoViewController: UIViewController, FilmInfoViewInput {
+    // MARK: - Properties
+    var filmInCollection: Bool = false {
+        didSet {
+            setupSaveAndDeleteButton()
+        }
+    }
+    private let presenter: FilmInfoViewOutput
     private var film: Film
     private var detailFilmInfo: DetailFilmResult
     // MARK: View
     private lazy var filmInfoView: FilmInfoView = {
         FilmInfoView()
     }()
-
     // MARK: - Init
-    init(film: Film, detailFilmInfo: DetailFilmResult) {
+    init(film: Film,
+         detailFilmInfo: DetailFilmResult,
+         presenter: FilmInfoViewOutput) {
         self.film = film
         self.detailFilmInfo = detailFilmInfo
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -34,20 +42,40 @@ class FilmInfoViewController: UIViewController {
         super.viewDidLoad()
         setupFilmViews()
         setupActions()
+        setupSaveAndDeleteButton()
+        presenter.viewDidRequestIsFilmInDateBase(filmId: film.filmID)
     }
-
     // MARK: - Setup film views
     private func setupFilmViews() {
         filmInfoView.configure(with: film)
         filmInfoView.configure(with: detailFilmInfo)
     }
-
+    private func setupSaveAndDeleteButton() {
+        switch filmInCollection {
+        case true:
+            filmInfoView.saveAndDeleteButton.setImage(UIImage(systemName: "heart.fill"),
+                                                      for: .normal)
+        case false:
+            filmInfoView.saveAndDeleteButton.setImage(UIImage(systemName: "heart"),
+                                                      for: .normal)
+        }
+    }
+    // MARK: - Setup actions
     private func setupActions() {
-        filmInfoView.hideButton.addTarget(self, action: #selector(hideVC), for: .touchUpInside)
+        filmInfoView.hideButton.addTarget(self, action: #selector(hideButtonTapped),
+                                          for: .touchUpInside)
+        filmInfoView.saveAndDeleteButton.addTarget(self, action: #selector(saveAndDeleteButtonTapped),
+                                                   for: .touchUpInside)
     }
-
-    @objc private func hideVC() {
-        dismiss(animated: true, completion: nil)
+    @objc private func hideButtonTapped() {
+        presenter.viewDidSelectHideButton()
     }
-
+    @objc private func saveAndDeleteButtonTapped() {
+        switch filmInCollection {
+        case true:
+            presenter.viewDidRequestToDeleteFilm(film: film)
+        case false:
+            presenter.viewDidRequestToSaveFilm(film: film)
+        }
+    }
 }

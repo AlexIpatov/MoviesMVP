@@ -7,7 +7,8 @@
 
 import UIKit
 
-class PosterViewController: UIViewController {
+class PosterViewController: UIViewController, DetailViewInput {
+    // MARK: - Properties
     var detailFilmInfo: DetailFilmResult? {
         didSet {
             presenter.viewDidOpenFilmInfoVC(with: film)
@@ -50,15 +51,10 @@ class PosterViewController: UIViewController {
         posterView.configure(with: film.posterURL)
     }
     private func setupActions() {
-        posterView.showVCButton.addTarget(self, action: #selector(showButtonTapped), for: .touchUpInside)
+        posterView.showVCButton.addTarget(self, action: #selector(showButtonTapped),
+                                          for: .touchUpInside)
     }
     @objc private func showButtonTapped() {
         presenter.viewDidOpenFilmInfoVC(with: film)
-    }
-}
-// MARK: - MainViewInput
-extension PosterViewController: DetailViewInput {
-    func showError() {
-        print("error")
     }
 }
