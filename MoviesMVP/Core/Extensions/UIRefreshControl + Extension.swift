@@ -10,7 +10,7 @@ import UIKit
 extension UIRefreshControl {
     convenience init(title: String) {
         self.init()
-        self.tintColor = .red
+        self.tintColor = .blue
         self.attributedTitle =  NSAttributedString(string: title)
     }
 }

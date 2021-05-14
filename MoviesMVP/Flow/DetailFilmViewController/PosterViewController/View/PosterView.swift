@@ -11,7 +11,7 @@ import Kingfisher
 class PosterView: UIView, SelfConfiguringView {
     // MARK: - Subviews
     private lazy var posterView = UIImageView(placeholderImageName: "")
-    let showVCButton = UIButton(title: "show info",
+    let showVCButton = UIButton(title: "Show info",
                                 cornerRadius: 0,
                                 backgroundColor: .white,
                                 tintColor: .blue)

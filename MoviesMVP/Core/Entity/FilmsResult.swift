@@ -27,7 +27,6 @@ struct Film: Codable, Hashable {
         case posterURLPreview = "posterUrlPreview"
     }
 }
-
 // MARK: - Country
 struct Country: Codable, Hashable {
     let country: String

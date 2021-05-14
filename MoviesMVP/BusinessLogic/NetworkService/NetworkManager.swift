@@ -19,7 +19,6 @@ class NetworkService: Networking {
         let task = createDataTask(from: request, completion: completion)
         task.resume()
     }
-
     private func createDataTask(from requst: URLRequest,
                                 completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
         return URLSession.shared.dataTask(with: requst,

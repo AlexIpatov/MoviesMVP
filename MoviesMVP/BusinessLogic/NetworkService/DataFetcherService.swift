@@ -30,7 +30,6 @@ class DataFetcherService {
             URLQueryItem(name: "page", value: pageNumber)
         ]
         guard let url = urlConstructor.url else { return }
-        print(url)
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
     func fetchFilmById(id: String,
@@ -48,7 +47,6 @@ class DataFetcherService {
             URLQueryItem(name: "page", value: pageNumber)
         ]
         guard let url = urlConstructor.url else { return }
-        print(#function)
         networkDataFetcher.fetchGenericJSONData(url: url, headers: headers, response: completion)
     }
 }

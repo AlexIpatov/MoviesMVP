@@ -12,18 +12,18 @@ class FilmInfoView: UIView, SelfConfiguringView {
     private lazy var ratingLabel = UILabel(font: .filmInfoDescriptionFont(),
                                            textColor: .black,
                                            numberOfLines: 1,
-                                           textAlignment: .center)
+                                           textAlignment: .left)
     private lazy var yearLabel = UILabel(font: .filmInfoDescriptionFont(),
                                          textColor: .black,
                                          numberOfLines: 1,
-                                         textAlignment: .center)
+                                         textAlignment: .left)
     private lazy var genresLabel = UILabel(font: .filmInfoDescriptionFont(),
                                            textColor: .black,
-                                           numberOfLines: 0,
+                                           numberOfLines: 2,
                                            textAlignment: .center)
     private lazy var countriesLabel = UILabel(font: .filmInfoDescriptionFont(),
                                               textColor: .black,
-                                              numberOfLines: 0,
+                                              numberOfLines: 2,
                                               textAlignment: .center)
     let hideButton: UIButton = {
         let button = UIButton()
@@ -33,7 +33,7 @@ class FilmInfoView: UIView, SelfConfiguringView {
         return button
     }()
     let saveAndDeleteButton = UIButton(image: UIImage(systemName: "heart"),
-                                       cornerRadius: 25,
+                                       cornerRadius: 40,
                                        tintColor: .red)
     private lazy var descriptionTextVeiw = UITextView(text: "", font: .filmInfoDescriptionFont())
 
@@ -51,7 +51,8 @@ class FilmInfoView: UIView, SelfConfiguringView {
     func configure<U>(with value: U) where U : Hashable {
         if let film = value as? Film {
             ratingLabel.text = "KP: \(film.rating ?? "-")"
-            yearLabel.text = film.year
+            ratingLabel.textColor = self.colorFromRating(rating: film.rating)
+            yearLabel.text = "Y: \(film.year ?? "-")"
         } else if let detailFilm = value as? DetailFilmResult {
             countriesLabel.text = detailFilm.data.countries?.compactMap { $0.country }.joined(separator: ", ")
             genresLabel.text = detailFilm.data.genres?.compactMap { $0.genre }.joined(separator: ", ")
@@ -70,25 +71,25 @@ class FilmInfoView: UIView, SelfConfiguringView {
         NSLayoutConstraint.activate([
             saveAndDeleteButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             saveAndDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
-            saveAndDeleteButton.widthAnchor.constraint(equalToConstant: 50),
+            saveAndDeleteButton.widthAnchor.constraint(equalToConstant: 80),
             saveAndDeleteButton.heightAnchor.constraint(equalTo: saveAndDeleteButton.widthAnchor),
 
-            yearLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            yearLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            yearLabel.heightAnchor.constraint(equalToConstant: 30),
-
-            ratingLabel.topAnchor.constraint(equalTo: yearLabel.bottomAnchor, constant: 5),
+            ratingLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             ratingLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            ratingLabel.heightAnchor.constraint(equalToConstant: 30),
+            ratingLabel.widthAnchor.constraint(equalToConstant: 80),
 
-            countriesLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),
-            countriesLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            countriesLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            yearLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 10),
+            yearLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            yearLabel.widthAnchor.constraint(equalToConstant: 80),
+
+            countriesLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            countriesLabel.leftAnchor.constraint(equalTo: ratingLabel.rightAnchor, constant: 10),
+            countriesLabel.rightAnchor.constraint(equalTo: saveAndDeleteButton.leftAnchor, constant: -10),
             countriesLabel.heightAnchor.constraint(equalToConstant: 40),
 
             genresLabel.topAnchor.constraint(equalTo: countriesLabel.bottomAnchor, constant: 5),
-            genresLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            genresLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            genresLabel.leftAnchor.constraint(equalTo: yearLabel.rightAnchor, constant: 10),
+            genresLabel.rightAnchor.constraint(equalTo: saveAndDeleteButton.leftAnchor, constant: -10),
             genresLabel.heightAnchor.constraint(equalToConstant: 40),
 
             descriptionTextVeiw.topAnchor.constraint(equalTo: genresLabel.bottomAnchor, constant: 5),

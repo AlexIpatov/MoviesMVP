@@ -78,7 +78,7 @@ class CoreDataService {
     func requestFilmFromCoreDataById(filmId: Int) -> CoreDataFilm? {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
         var coreDataFilm: CoreDataFilm?
-        fetchRequest.predicate =  NSPredicate(format: "filmID = %@", "\(filmId)")
+        fetchRequest.predicate = NSPredicate(format: "filmID = %@", "\(filmId)")
         do {
             coreDataFilm = try context.fetch(fetchRequest).first
         } catch {
@@ -89,7 +89,7 @@ class CoreDataService {
     func filmInCoreData (filmId: Int) -> Bool {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
         var coreDataFilmCount: Int = 0
-        fetchRequest.predicate =  NSPredicate(format: "filmID = %@", "\(filmId)")
+        fetchRequest.predicate = NSPredicate(format: "filmID = %@", "\(filmId)")
         do {
             coreDataFilmCount = try context.fetch(fetchRequest).count
         } catch {
@@ -101,7 +101,7 @@ class CoreDataService {
     func removeFilm (film: Film) {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
         var coreDataFilm: CoreDataFilm?
-        fetchRequest.predicate =  NSPredicate(format: "filmID = %@", "\(film.filmID)")
+        fetchRequest.predicate = NSPredicate(format: "filmID = %@", "\(film.filmID)")
         do {
             coreDataFilm = try context.fetch(fetchRequest).first
         } catch {

@@ -23,16 +23,15 @@ class MainPresenter {
     private var currentPage: Int = 2
     private var maxPageCount: Int = 0
     weak var viewInput: (UIViewController & MainViewInput)?
-    
+
     private let dataFetcherService: DataFetcherService
     private let coreDataService: CoreDataService
-    
+
     init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
-        
     }
-    
+
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
         let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
@@ -63,9 +62,9 @@ extension MainPresenter {
                   let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
-            
+
             self.viewInput?.searchResults += result.films
-            
+
             self.currentPage += 1
         }
     }
@@ -87,9 +86,9 @@ extension MainPresenter {
                   let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
-            
+
             self.viewInput?.results += result.films
-            
+
             self.currentPage += 1
         }
     }

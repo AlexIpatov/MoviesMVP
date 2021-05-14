@@ -14,6 +14,8 @@
 		4A79EF88264D737300788430 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79EF87264D737300788430 /* UIViewController + Extension.swift */; };
 		4A79EF8A264D73D800788430 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79EF89264D73D800788430 /* SelfConfiguringCell.swift */; };
 		4A7EBE60264E91B80013FC0A /* SectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EBE5F264E91B80013FC0A /* SectionFooter.swift */; };
+		4A7EBE65264EDC530013FC0A /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EBE64264EDC530013FC0A /* UIColor + Extension.swift */; };
+		4A7EBE67264EDD270013FC0A /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7EBE66264EDD270013FC0A /* UIView + Extension.swift */; };
 		4A8251562646739D001B94C3 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8251552646739D001B94C3 /* CoreDataService.swift */; };
 		4A82515926467C17001B94C3 /* CoreDataFilm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A82515726467C17001B94C3 /* CoreDataFilm+CoreDataClass.swift */; };
 		4A82515A26467C17001B94C3 /* CoreDataFilm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A82515826467C17001B94C3 /* CoreDataFilm+CoreDataProperties.swift */; };
@@ -93,6 +95,8 @@
 		4A79EF87264D737300788430 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		4A79EF89264D73D800788430 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		4A7EBE5F264E91B80013FC0A /* SectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFooter.swift; sourceTree = "<group>"; };
+		4A7EBE64264EDC530013FC0A /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		4A7EBE66264EDD270013FC0A /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		4A8251552646739D001B94C3 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		4A82515726467C17001B94C3 /* CoreDataFilm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataFilm+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4A82515826467C17001B94C3 /* CoreDataFilm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataFilm+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -191,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				4AAF4F9A2643EBBB002E9B27 /* PosterViewController */,
-				4AAF4FDC264420C2002E9B27 /* Presenter */,
 				4AAF4F9B2643EBD2002E9B27 /* FilmInfoViewController */,
 			);
 			path = DetailFilmViewController;
@@ -487,6 +490,8 @@
 				4AAF4FD826440DA9002E9B27 /* UITextView + Extension.swift */,
 				4AAF4FDA26441DAE002E9B27 /* UIButton + Extension.swift */,
 				4A79EF87264D737300788430 /* UIViewController + Extension.swift */,
+				4A7EBE64264EDC530013FC0A /* UIColor + Extension.swift */,
+				4A7EBE66264EDD270013FC0A /* UIView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 		4AAF4F9A2643EBBB002E9B27 /* PosterViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4AAF4FDC264420C2002E9B27 /* Presenter */,
 				4AAF4FDF26442625002E9B27 /* Builder */,
 				4AAF4FCE2643F398002E9B27 /* View */,
 				4AAF4FCD2643F391002E9B27 /* Controller */,
@@ -801,8 +807,10 @@
 				4A8251762646AF33001B94C3 /* SavedFilmsBuilder.swift in Sources */,
 				4AAF4FCA2643EFB9002E9B27 /* PosterViewController.swift in Sources */,
 				4A8251562646739D001B94C3 /* CoreDataService.swift in Sources */,
+				4A7EBE65264EDC530013FC0A /* UIColor + Extension.swift in Sources */,
 				4A9234BB26416CDB006D2569 /* UIFont + Extensions.swift in Sources */,
 				4A8251732646ACF1001B94C3 /* TopTypesEnum.swift in Sources */,
+				4A7EBE67264EDD270013FC0A /* UIView + Extension.swift in Sources */,
 				4A82515926467C17001B94C3 /* CoreDataFilm+CoreDataClass.swift in Sources */,
 				4AAF4FC22643EDAD002E9B27 /* PresentAnimation.swift in Sources */,
 				4A9234C326418C66006D2569 /* UIRefreshControl + Extension.swift in Sources */,

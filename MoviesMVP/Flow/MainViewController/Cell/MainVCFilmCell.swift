@@ -45,6 +45,7 @@ class MainVCFilmCell: UITableViewCell, SelfConfiguringCell {
         guard let film: Film = value as? Film else { return }
         titleLabel.text = film.nameRu
         yearLabel.text = "year: \(film.year ?? "-")"
+        ratingLabel.textColor = self.colorFromRating(rating: film.rating)
         ratingLabel.text = "rating: \(film.rating ?? "-")"
         posterImageView.kf.setImage(with: URL(string: film.posterURLPreview))
     }
