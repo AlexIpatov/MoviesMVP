@@ -10,11 +10,11 @@ import UIKit
 protocol SavedFilmsViewInput: AnyObject {
     var savedFilms: [Film] {get set}
     var recommendedFilms: [Film] {get set}
-    func showError()
 }
 protocol SavedFilmsViewOutput: AnyObject {
     func viewDidRequest()
     func viewDidRequestSavedFilms()
+    func viewDidRequestDeleteAllFilms()
     func viewDidSelectFilm(_ film: Film)
 }
 class SavedFilmsPresenter {
@@ -44,12 +44,12 @@ extension SavedFilmsPresenter {
         dataFetcherService.fetchBestFilms( type: .popular) { [weak self] result in
             guard let self = self,
                   let result = result
-                  else {return}
+            else {return}
             self.viewInput?.recommendedFilms = result.films
         }
     }
 }
-// MARK: - CoreData request
+// MARK: - CoreData requests
 extension SavedFilmsPresenter {
     // MARK: Request saved films
     private func requestSavedFilms() {
@@ -57,8 +57,14 @@ extension SavedFilmsPresenter {
             self.viewInput?.savedFilms = result
         }
     }
+    private func deleteFilms() {
+        coreDataService.removeAllFilmsFromCoreData()
+    }
 }
 extension SavedFilmsPresenter: SavedFilmsViewOutput {
+    func viewDidRequestDeleteAllFilms() {
+        deleteFilms()
+    }
     func viewDidRequestSavedFilms() {
         requestSavedFilms()
     }

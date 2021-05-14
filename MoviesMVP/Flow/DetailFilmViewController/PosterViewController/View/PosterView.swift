@@ -13,10 +13,8 @@ class PosterView: UIView, SelfConfiguringView {
     private lazy var posterView = UIImageView(placeholderImageName: "")
     let showVCButton = UIButton(title: "show info",
                                 cornerRadius: 0,
-                                backgroundColor: .blue)
-    let addAndRemoveFilmButton = UIButton(title: "Add to my films",
-                                          cornerRadius: 0,
-                                          backgroundColor: .green)
+                                backgroundColor: .white,
+                                tintColor: .blue)
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,25 +31,18 @@ class PosterView: UIView, SelfConfiguringView {
     }
     // MARK: - Setup constraints
     private func setupConstraints() {
-        addSubview(addAndRemoveFilmButton)
         addSubview(posterView)
         addSubview(showVCButton)
         NSLayoutConstraint.activate([
-            addAndRemoveFilmButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            addAndRemoveFilmButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            addAndRemoveFilmButton.widthAnchor.constraint(equalTo: widthAnchor),
-            addAndRemoveFilmButton.heightAnchor.constraint(equalToConstant: 40),
-
-            posterView.topAnchor.constraint(equalTo: addAndRemoveFilmButton.bottomAnchor),
-            posterView.leftAnchor.constraint(equalTo: leftAnchor),
-            posterView.rightAnchor.constraint(equalTo: rightAnchor),
+            posterView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            posterView.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+            posterView.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor),
             posterView.bottomAnchor.constraint(equalTo: showVCButton.topAnchor),
 
             showVCButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             showVCButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             showVCButton.widthAnchor.constraint(equalTo: widthAnchor),
             showVCButton.heightAnchor.constraint(equalToConstant: 40)
-
         ])
     }
 }

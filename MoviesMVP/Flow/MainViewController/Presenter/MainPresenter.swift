@@ -10,7 +10,6 @@ import UIKit
 protocol MainViewInput: AnyObject {
     var results: [Film] {get set}
     var searchResults: [Film] {get set}
-    func showError()
 }
 protocol MainViewOutput: AnyObject {
     func viewDidRequest()
@@ -21,7 +20,7 @@ protocol MainViewOutput: AnyObject {
 }
 class MainPresenter {
     private var currentKeyword: String?
-    private var currentPage: Int = 1
+    private var currentPage: Int = 2
     private var maxPageCount: Int = 0
     weak var viewInput: (UIViewController & MainViewInput)?
 
@@ -31,6 +30,7 @@ class MainPresenter {
     init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
         self.dataFetcherService = dataFetcherService
+
     }
 
     // MARK: - Open next vc
@@ -53,7 +53,7 @@ extension MainPresenter {
             self.maxPageCount = result.pagesCount
             print(result.pagesCount)
             self.currentKeyword = result.keyword
-            self.currentPage = 1
+            self.currentPage = 2
         }
     }
     private func requestMoreFilmsByCurrentKeyword() {
@@ -94,7 +94,6 @@ extension MainPresenter {
         }
     }
 }
-
 extension MainPresenter: MainViewOutput {
     func viewDidRequest() {
         requestData()

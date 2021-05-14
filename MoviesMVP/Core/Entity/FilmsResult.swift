@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct FilmsResult: Codable, Hashable {
     let pagesCount: Int
@@ -13,7 +14,7 @@ struct FilmsResult: Codable, Hashable {
 }
 // MARK: - Film
 struct Film: Codable, Hashable {
-    let filmID: Int
+    var filmID: Int
     let nameRu: String
     let nameEn: String?
     let year: String?

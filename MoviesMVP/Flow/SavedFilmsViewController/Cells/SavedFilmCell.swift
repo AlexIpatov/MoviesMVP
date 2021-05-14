@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SavedFilmCell: UICollectionViewCell, SelfConfiguringView {
+class SavedFilmCell: UICollectionViewCell, SelfConfiguringCell {
 
     // MARK: Cell ID
     static var reuseId: String = "SavedFilmCell"
@@ -51,6 +51,8 @@ class SavedFilmCell: UICollectionViewCell, SelfConfiguringView {
     // MARK: - Setup UI
     private func setupLayer() {
         backgroundColor = .white
+        layer.borderWidth = 0.2
+        layer.borderColor = UIColor.systemGray.cgColor
     }
     private func setupConstraints() {
         contentView.addSubview(titleLabel)

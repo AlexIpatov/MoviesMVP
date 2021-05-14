@@ -14,7 +14,17 @@ class SectionHeader: UICollectionReusableView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        setupConstraints()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    func configure(text: String, font: UIFont?, textColor: UIColor) {
+        title.textColor = textColor
+        title.font = font
+        title.text = text
+    }
+    private func setupConstraints() {
         title.translatesAutoresizingMaskIntoConstraints = false
         addSubview(title)
 
@@ -24,15 +34,5 @@ class SectionHeader: UICollectionReusableView {
             title.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             title.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
-    }
-
-    func configure(text: String, font: UIFont?, textColor: UIColor) {
-        title.textColor = textColor
-        title.font = font
-        title.text = text
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

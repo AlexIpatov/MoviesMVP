@@ -9,16 +9,20 @@ import UIKit
 
 class FilmInfoView: UIView, SelfConfiguringView {
     // MARK: - Subviews
-    private lazy var ratingLabel = UILabel(textColor: .black,
+    private lazy var ratingLabel = UILabel(font: .filmInfoDescriptionFont(),
+                                           textColor: .black,
                                            numberOfLines: 1,
                                            textAlignment: .center)
-    private lazy var yearLabel = UILabel(textColor: .black,
+    private lazy var yearLabel = UILabel(font: .filmInfoDescriptionFont(),
+                                         textColor: .black,
                                          numberOfLines: 1,
                                          textAlignment: .center)
-    private lazy var genresLabel = UILabel(textColor: .black,
+    private lazy var genresLabel = UILabel(font: .filmInfoDescriptionFont(),
+                                           textColor: .black,
                                            numberOfLines: 0,
                                            textAlignment: .center)
-    private lazy var countriesLabel = UILabel(textColor: .black,
+    private lazy var countriesLabel = UILabel(font: .filmInfoDescriptionFont(),
+                                              textColor: .black,
                                               numberOfLines: 0,
                                               textAlignment: .center)
     let hideButton: UIButton = {
@@ -28,6 +32,9 @@ class FilmInfoView: UIView, SelfConfiguringView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    let saveAndDeleteButton = UIButton(image: UIImage(systemName: "heart"),
+                                       cornerRadius: 25,
+                                       tintColor: .red)
     private lazy var descriptionTextVeiw = UITextView(text: "", font: .filmInfoDescriptionFont())
 
     // MARK: - Init
@@ -59,14 +66,19 @@ class FilmInfoView: UIView, SelfConfiguringView {
         addSubview(countriesLabel)
         addSubview(descriptionTextVeiw)
         addSubview(hideButton)
+        addSubview(saveAndDeleteButton)
         NSLayoutConstraint.activate([
+            saveAndDeleteButton.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            saveAndDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+            saveAndDeleteButton.widthAnchor.constraint(equalToConstant: 50),
+            saveAndDeleteButton.heightAnchor.constraint(equalTo: saveAndDeleteButton.widthAnchor),
 
             yearLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             yearLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             yearLabel.heightAnchor.constraint(equalToConstant: 30),
 
-            ratingLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            ratingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+            ratingLabel.topAnchor.constraint(equalTo: yearLabel.bottomAnchor, constant: 5),
+            ratingLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             ratingLabel.heightAnchor.constraint(equalToConstant: 30),
 
             countriesLabel.topAnchor.constraint(equalTo: ratingLabel.bottomAnchor, constant: 5),

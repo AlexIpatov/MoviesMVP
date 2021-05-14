@@ -13,8 +13,14 @@ extension CoreDataFilm {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFilm> {
         return NSFetchRequest<CoreDataFilm>(entityName: "CoreDataFilm")
     }
+    @NSManaged var nameRu: String?
+    @NSManaged var nameEn: String?
+    @NSManaged var year: String?
+    @NSManaged var rating: String?
+    @NSManaged var filmID: Int32
+    @NSManaged var posterURL: String?
+    @NSManaged var posterURLPreview: String?
 }
-
 extension CoreDataFilm : Identifiable {
 
 }

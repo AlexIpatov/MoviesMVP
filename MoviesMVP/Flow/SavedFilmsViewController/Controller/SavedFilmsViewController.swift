@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SavedFilmsViewController: UIViewController {
-
+class SavedFilmsViewController: UIViewController, SavedFilmsViewInput {
+    // MARK: - Properties
     var recommendedFilms = [Film]() {
         didSet {
             reloadData()
@@ -20,11 +20,9 @@ class SavedFilmsViewController: UIViewController {
         }
     }
     private let presenter: SavedFilmsViewOutput
-
     private lazy var savedFilmsView: SavedFilmsView = {
         SavedFilmsView()
     }()
-
     // MARK: - Init
     init(presenter: SavedFilmsViewOutput) {
         self.presenter = presenter
@@ -39,29 +37,33 @@ class SavedFilmsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationItems()
         setupCollectionView()
         createDataSource()
+        presenter.viewDidRequest()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         requestDataForCollectionView()
     }
-
+    // MARK: - Setup navigation items
+    private func setupNavigationItems() {
+        navigationItem.title = "Saved films"
+    }
     private func requestDataForCollectionView() {
-        presenter.viewDidRequest()
         presenter.viewDidRequestSavedFilms()
     }
     // MARK: - CollectionView set up
     var dataSource: UICollectionViewDiffableDataSource<Section, Film>?
-
     private func setupCollectionView() {
-        savedFilmsView.collectionView.register(RecommendedFilmCell.self,
-                                         forCellWithReuseIdentifier: RecommendedFilmCell.reuseId)
         savedFilmsView.collectionView.register(SavedFilmCell.self,
-                                         forCellWithReuseIdentifier: SavedFilmCell.reuseId)
+                                               forCellWithReuseIdentifier: SavedFilmCell.reuseId)
         savedFilmsView.collectionView.register(SectionHeader.self,
-                                         forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                         withReuseIdentifier: SectionHeader.reuseId)
+                                               forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                               withReuseIdentifier: SectionHeader.reuseId)
+        savedFilmsView.collectionView.register(SectionFooter.self,
+                                               forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                               withReuseIdentifier: SectionFooter.reuseId)
         savedFilmsView.collectionView.delegate = self
     }
     private func reloadData() {
@@ -75,26 +77,37 @@ class SavedFilmsViewController: UIViewController {
 // MARK: - Data Source
 extension SavedFilmsViewController {
     private func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Film>(collectionView: savedFilmsView.collectionView,
-                                                                              cellProvider: {(collectionView, indexPath, item) -> UICollectionViewCell? in
-                                                                                guard let section = Section(rawValue: indexPath.section) else {
-                                                                                    fatalError("Unknown section kind")
-                                                                                }
-                                                                                switch section {
-                                                                                case .recommended:
-                                                                                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedFilmCell.reuseId,
-                                                                                                                                        for: indexPath) as? RecommendedFilmCell else { return UICollectionViewCell() }
-                                                                                    cell.configure(with: item)
-                                                                                    return cell
-                                                                                case .myFilms:
-                                                                                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SavedFilmCell.reuseId,
-                                                                                                                                        for: indexPath) as? SavedFilmCell else { return UICollectionViewCell() }
-                                                                                    cell.configure(with: item)
-                                                                                    return cell
-
-                                                                                }
-                                                                              })
+        dataSource = UICollectionViewDiffableDataSource
+        <Section, Film>(collectionView: savedFilmsView.collectionView,
+                        cellProvider: {(collectionView, indexPath, item) -> UICollectionViewCell? in
+                            guard let section = Section(rawValue: indexPath.section) else {
+                                fatalError("Unknown section kind")
+                            }
+                            switch section {
+                            case .recommended:
+                                return self.configure(collectionView: collectionView,
+                                                      cellType: SavedFilmCell.self,
+                                                      with: item,
+                                                      for: indexPath)
+                            case .myFilms:
+                                return self.configure(collectionView: collectionView,
+                                                      cellType: SavedFilmCell.self,
+                                                      with: item,
+                                                      for: indexPath)
+                            }
+                        })
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionFooter {
+                guard let sectionFooter = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                                                          withReuseIdentifier: SectionFooter.reuseId,
+                                                                                          for: indexPath) as? SectionFooter else {
+                    fatalError("Can not create new section header")
+                }
+                sectionFooter.deleteAllButton.addTarget(self,
+                                                        action: #selector(self.deleteAllButtonTapped),
+                                                        for: .touchUpInside)
+                return sectionFooter
+            }
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                                       withReuseIdentifier: SectionHeader.reuseId,
                                                                                       for: indexPath) as? SectionHeader else {
@@ -108,16 +121,17 @@ extension SavedFilmsViewController {
         }
     }
 }
-
 // MARK: - UICollectionViewDelegate
 extension SavedFilmsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let currentCell = self.dataSource?.itemIdentifier(for: indexPath) else { return }
+        presenter.viewDidSelectFilm(currentCell)
     }
 }
-
-extension SavedFilmsViewController: SavedFilmsViewInput {
-    func showError() {
-        print("error")
+// MARK: Actions
+extension SavedFilmsViewController {
+    @objc private func deleteAllButtonTapped() {
+        presenter.viewDidRequestDeleteAllFilms()
+        requestDataForCollectionView()
     }
-
 }

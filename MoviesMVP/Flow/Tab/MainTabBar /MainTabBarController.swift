@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-
+    // MARK: - Properties
     private let dataFetcherService: DataFetcherService
     private let coreDataService: CoreDataService
     // MARK: - Init
@@ -24,7 +24,7 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
-        tabBar.tintColor = .red
+        tabBar.tintColor = .blue
     }
     // MARK: - Setup
     private func setupControllers() {
@@ -32,17 +32,16 @@ final class MainTabBarController: UITabBarController {
                                                    coreDataService: coreDataService)
         let savedFilmsViewController = SavedFilmsBuilder.build(dataFetcherService: dataFetcherService,
                                                                coreDataService: coreDataService)
-
         viewControllers = [
             generateNavigationController(rootViewController: mainViewController,
-                                         title: "films",
-                                         image: UIImage(systemName: "square.grid.2x2.fill")!,
-                                         selectedImage: UIImage(systemName: "square.grid.2x2.fill")!),
+                                         title: "Search",
+                                         image: UIImage(systemName: "magnifyingglass.circle")!,
+                                         selectedImage: UIImage(systemName: "magnifyingglass.circle.fill")!),
 
             generateNavigationController(rootViewController: savedFilmsViewController,
-                                         title: "savedFilms",
-                                         image:  UIImage(systemName: "square.grid.2x2.fill")!,
-                                         selectedImage: UIImage(systemName: "square.grid.2x2.fill")!)
+                                         title: "My films",
+                                         image:  UIImage(systemName: "ticket")!,
+                                         selectedImage: UIImage(systemName: "ticket.fill")!)
         ]
     }
     private func generateNavigationController(rootViewController: UIViewController,
@@ -55,5 +54,4 @@ final class MainTabBarController: UITabBarController {
         navigationVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         return navigationVC
     }
-
 }

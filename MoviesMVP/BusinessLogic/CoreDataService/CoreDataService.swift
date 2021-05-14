@@ -13,16 +13,14 @@ class CoreDataService {
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MoviesMVP")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
     }()
-
     private lazy var context = persistentContainer.viewContext
-
     // MARK: - Core Data Saving support
     func saveContext () {
         if context.hasChanges {
@@ -41,7 +39,6 @@ class CoreDataService {
         else { return }
         configCoreDataFilm(film: film, newCoreDataFilmObject: newCoreDataFilmObject)
         saveContext()
-
     }
     private func configCoreDataFilm(film: Film, newCoreDataFilmObject: CoreDataFilm) {
         newCoreDataFilmObject.filmID = Int32(film.filmID)
@@ -63,7 +60,6 @@ class CoreDataService {
         }
         completion(configFilmsFromCoreData(coreDataFilms: coreDataFilms))
     }
-
     private func configFilmsFromCoreData(coreDataFilms: [CoreDataFilm]) -> [Film] {
         var films = [Film]()
         coreDataFilms.forEach { coreDataFilm in
@@ -78,7 +74,6 @@ class CoreDataService {
         }
         return films
     }
-
     // MARK: - Search filmID in CoreData
     func requestFilmFromCoreDataById(filmId: Int) -> CoreDataFilm? {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
@@ -91,7 +86,6 @@ class CoreDataService {
         }
         return coreDataFilm
     }
-
     func filmInCoreData (filmId: Int) -> Bool {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
         var coreDataFilmCount: Int = 0
@@ -103,8 +97,7 @@ class CoreDataService {
         }
        return coreDataFilmCount != 0
     }
-
-    // MARK: - Delete from CoreData
+    // MARK: - Delete film from CoreData
     func removeFilm (film: Film) {
         let fetchRequest: NSFetchRequest<CoreDataFilm> = CoreDataFilm.fetchRequest()
         var coreDataFilm: CoreDataFilm?
@@ -118,4 +111,13 @@ class CoreDataService {
         context.delete(coreDataFilm)
         saveContext()
 }
+    // MARK: - Delete all films from CoreData
+    func removeAllFilmsFromCoreData() {
+        do {
+            try context.execute(NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: "CoreDataFilm")))
+        } catch {
+            print(error.localizedDescription)
+        }
+        saveContext()
+    }
 }

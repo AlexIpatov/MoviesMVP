@@ -19,9 +19,7 @@ class MainView: UIView {
         addSubview(tableView)
         return tableView
     }()
-
     var refreshControl = UIRefreshControl(title: "Loading...")
-
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
