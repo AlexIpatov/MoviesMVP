@@ -35,11 +35,9 @@ class MainVCFilmCell: UITableViewCell, SelfConfiguringCell {
         setupConstraints()
         setupLayer()
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     // MARK: - Configure
     func configure<U>(with value: U) where U : Hashable {
         guard let film: Film = value as? Film else { return }
