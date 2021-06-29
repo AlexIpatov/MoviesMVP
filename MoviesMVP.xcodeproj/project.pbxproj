@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0A6F9A268B05920034CDAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A0A6F99268B05920034CDAE /* Assets.xcassets */; };
 		4A74F3232645412500DD850F /* SearchFilmResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A74F3222645412500DD850F /* SearchFilmResult.swift */; };
 		4A7538412642A21C0039BC1F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7538402642A21C0039BC1F /* MainTabBarController.swift */; };
 		4A79EF83264D2F9F00788430 /* FilmInfoViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79EF82264D2F9F00788430 /* FilmInfoViewPresenter.swift */; };
@@ -49,7 +50,6 @@
 		4A9234C326418C66006D2569 /* UIRefreshControl + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C226418C66006D2569 /* UIRefreshControl + Extension.swift */; };
 		4A9234C626419A9F006D2569 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C526419A9F006D2569 /* MainPresenter.swift */; };
 		4A9234C92641A70B006D2569 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9234C82641A70B006D2569 /* MainBuilder.swift */; };
-		4A9DCC242651383200C5D558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9DCC232651383200C5D558 /* Assets.xcassets */; };
 		4AAF4FB52643ED1E002E9B27 /* PanelTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF4FB42643ED1E002E9B27 /* PanelTransition.swift */; };
 		4AAF4FB72643ED40002E9B27 /* TransitionDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF4FB62643ED40002E9B27 /* TransitionDriver.swift */; };
 		4AAF4FBA2643ED5B002E9B27 /* TransitionDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF4FB92643ED5B002E9B27 /* TransitionDirection.swift */; };
@@ -88,6 +88,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A0A6F99268B05920034CDAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A74F3222645412500DD850F /* SearchFilmResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilmResult.swift; sourceTree = "<group>"; };
 		4A7538402642A21C0039BC1F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4A79EF82264D2F9F00788430 /* FilmInfoViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfoViewPresenter.swift; sourceTree = "<group>"; };
@@ -135,7 +136,6 @@
 		4A9234C226418C66006D2569 /* UIRefreshControl + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl + Extension.swift"; sourceTree = "<group>"; };
 		4A9234C526419A9F006D2569 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		4A9234C82641A70B006D2569 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
-		4A9DCC232651383200C5D558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		4AAF4FB42643ED1E002E9B27 /* PanelTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelTransition.swift; sourceTree = "<group>"; };
 		4AAF4FB62643ED40002E9B27 /* TransitionDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionDriver.swift; sourceTree = "<group>"; };
 		4AAF4FB92643ED5B002E9B27 /* TransitionDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionDirection.swift; sourceTree = "<group>"; };
@@ -185,8 +185,8 @@
 		4A75382C2642909D0039BC1F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4A9DCC232651383200C5D558 /* Assets.xcassets */,
 				4A92347126414AE1006D2569 /* LaunchScreen.storyboard */,
+				4A0A6F99268B05920034CDAE /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -717,7 +717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A92347326414AE1006D2569 /* LaunchScreen.storyboard in Resources */,
-				4A9DCC242651383200C5D558 /* Assets.xcassets in Resources */,
+				4A0A6F9A268B05920034CDAE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
