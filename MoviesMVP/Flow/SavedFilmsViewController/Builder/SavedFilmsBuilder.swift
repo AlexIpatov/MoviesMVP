@@ -8,9 +8,9 @@
 import UIKit
 
 class SavedFilmsBuilder {
-    static func build(dataFetcherService: DataFetcherService,
+    static func build(requestFactory: RequestFactory,
                       coreDataService: CoreDataService) -> (UIViewController & SavedFilmsViewInput) {
-        let presenter = SavedFilmsPresenter(dataFetcherService: dataFetcherService, coreDataService: coreDataService)
+        let presenter = SavedFilmsPresenter(requestFactory: requestFactory, coreDataService: coreDataService)
         let viewController = SavedFilmsViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController

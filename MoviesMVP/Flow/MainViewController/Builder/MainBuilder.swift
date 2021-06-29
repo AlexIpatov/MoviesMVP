@@ -8,9 +8,9 @@
 import UIKit
 
 class MainBuilder {
-    static func build(dataFetcherService: DataFetcherService,
+    static func build(requestFactory: RequestFactory,
                       coreDataService: CoreDataService) -> (UIViewController & MainViewInput) {
-        let presenter = MainPresenter(dataFetcherService: dataFetcherService, coreDataService: coreDataService)
+        let presenter = MainPresenter(requestFactory: requestFactory, coreDataService: coreDataService)
         let viewController = MainViewController(presenter: presenter)
         presenter.viewInput = viewController
         return viewController

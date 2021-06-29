@@ -9,11 +9,11 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
-    private let dataFetcherService: DataFetcherService
+    private let requestFactory: RequestFactory
     private let coreDataService: CoreDataService
     // MARK: - Init
-    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
-        self.dataFetcherService = dataFetcherService
+    init(requestFactory: RequestFactory, coreDataService: CoreDataService) {
+        self.requestFactory = requestFactory
         self.coreDataService = coreDataService
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,9 +28,9 @@ final class MainTabBarController: UITabBarController {
     }
     // MARK: - Setup
     private func setupControllers() {
-        let mainViewController = MainBuilder.build(dataFetcherService: dataFetcherService,
+        let mainViewController = MainBuilder.build(requestFactory: requestFactory,
                                                    coreDataService: coreDataService)
-        let savedFilmsViewController = SavedFilmsBuilder.build(dataFetcherService: dataFetcherService,
+        let savedFilmsViewController = SavedFilmsBuilder.build(requestFactory: requestFactory,
                                                                coreDataService: coreDataService)
         viewControllers = [
             generateNavigationController(rootViewController: mainViewController,

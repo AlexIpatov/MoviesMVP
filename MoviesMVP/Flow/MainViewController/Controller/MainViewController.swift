@@ -15,12 +15,16 @@ class MainViewController: UIViewController, MainViewInput {
     // MARK: Results from api
     var results = [Film]() {
         didSet {
-            mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+            }
         }
     }
     var searchResults = [Film]() {
         didSet {
-            mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+            }
         }
     }
     // MARK: - Search controller
