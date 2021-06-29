@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var dataFetcherService: DataFetcherService?
     var dataFetcher = NetworkDataFetcher()
     var coreDataService = CoreDataService()
+    var requestFactory = RequestFactory()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -23,6 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let dataFetcherService = dataFetcherService else {
             return
         }
+        let req = requestFactory.makeGetFilmsByKeywordFactory()
+        req.load(keyword: "Джон", pageNumber: "1") { result in
+            switch result {
+            case .success(let film):
+                print(film)
+            case .failure(let error):
+                print(error)
+            }
+        }
+
         window?.rootViewController =  MainTabBarController(dataFetcherService: dataFetcherService,
                                                            coreDataService: coreDataService)
         window?.makeKeyAndVisible()
