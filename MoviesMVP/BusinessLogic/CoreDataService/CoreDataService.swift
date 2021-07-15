@@ -45,8 +45,6 @@ class CoreDataService {
         newCoreDataFilmObject.rating = film.rating
         newCoreDataFilmObject.year = film.year
         newCoreDataFilmObject.nameRu = film.nameRu
-        newCoreDataFilmObject.nameEn = film.nameEn
-        newCoreDataFilmObject.posterURL = film.posterURL
         newCoreDataFilmObject.posterURLPreview = film.posterURLPreview
     }
     // MARK: - Load films from CoreData
@@ -65,10 +63,8 @@ class CoreDataService {
         coreDataFilms.forEach { coreDataFilm in
             let film = Film(filmID: Int(coreDataFilm.filmID),
                             nameRu: coreDataFilm.nameRu ?? "",
-                            nameEn: coreDataFilm.nameEn,
                             year: coreDataFilm.year,
                             rating: coreDataFilm.rating,
-                            posterURL: coreDataFilm.posterURL ?? "",
                             posterURLPreview: coreDataFilm.posterURLPreview ?? "")
             films.append(film)
         }

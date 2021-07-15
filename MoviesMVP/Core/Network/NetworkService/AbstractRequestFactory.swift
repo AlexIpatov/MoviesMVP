@@ -89,11 +89,11 @@ extension AbstractRequestFactory {
             requestLog += "\(key): \(value)\n"
         }
         if let body = request.httpBody {
-            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded"
             requestLog += "\n\(bodyString)\n"
         }
 
-        requestLog += "\n------------------------->\n" ;
+        requestLog += "\n------------------------->\n"
         print(requestLog)
     }
 
@@ -121,14 +121,14 @@ extension AbstractRequestFactory {
             responseLog += "\(key): \(value)\n"
         }
         if let body = data {
-            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded";
+            let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body; not utf8 encoded"
             responseLog += "\n\(bodyString)\n"
         }
         if let error = error {
             responseLog += "\nError: \(error.localizedDescription)\n"
         }
 
-        responseLog += "<------------------------\n" ;
+        responseLog += "<------------------------\n" 
         print(responseLog)
     }
 

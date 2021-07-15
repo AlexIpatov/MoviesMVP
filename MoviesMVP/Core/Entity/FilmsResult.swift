@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 struct FilmsResult: Codable, Hashable {
     let pagesCount: Int
@@ -15,15 +14,13 @@ struct FilmsResult: Codable, Hashable {
 // MARK: - Film
 struct Film: Codable, Hashable {
     var filmID: Int
-    let nameRu: String
-    let nameEn: String?
+    let nameRu: String?
     let year: String?
     let rating: String?
-    let posterURL, posterURLPreview: String
+    let posterURLPreview: String
     enum CodingKeys: String, CodingKey {
         case filmID = "filmId"
-        case nameRu, nameEn, year, rating
-        case posterURL = "posterUrl"
+        case nameRu, year, rating
         case posterURLPreview = "posterUrlPreview"
     }
 }

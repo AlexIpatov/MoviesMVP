@@ -20,10 +20,7 @@ final class AppStartManager {
         self.window = window
     }
     func start() {
-        let navVC = UINavigationController(rootViewController: rootViewController)
-
-        window?.rootViewController = navVC
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }
 }
-
