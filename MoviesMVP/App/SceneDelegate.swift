@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         appStartManager = AppStartManager(window: window)
         appStartManager?.start()
-        ////TESTSSSadxdqSqs/
-       // awdawdawwadawdawd
+
     }
     func sceneDidEnterBackground(_ scene: UIScene) {
         
