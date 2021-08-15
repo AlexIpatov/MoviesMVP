@@ -15,12 +15,16 @@ class MainViewController: UIViewController, MainViewInput {
     // MARK: Results from api
     var results = [Film]() {
         didSet {
-            mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+            }
         }
     }
     var searchResults = [Film]() {
         didSet {
-            mainView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.mainView.tableView.reloadData()
+            }
         }
     }
     // MARK: - Search controller
@@ -31,6 +35,11 @@ class MainViewController: UIViewController, MainViewInput {
     }
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
+    }
+    private var keyword: String? {
+        didSet {
+            self.presenter.viewDidRequestFilmsByKeyword(keyword: keyword)
+        }
     }
     // MARK: - Presenter
     private let presenter: MainViewOutput
@@ -56,20 +65,20 @@ class MainViewController: UIViewController, MainViewInput {
     }
     // MARK: - FetchData
     private func fetchData() {
-        presenter.viewDidRequest()
+        presenter.viewDidRequestBestFilms()
     }
     // MARK: - Setup navigation items
     private func setupNavigationItems() {
         navigationItem.searchController = searchController
-        navigationItem.title = "Search films"
+        navigationItem.title = "Поиск фильмов"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = "Поиск"
         definesPresentationContext = true
     }
-
     // MARK: - Setup TableView
     private func setupTableView() {
         mainView.tableView.register(MainVCFilmCell.self,
@@ -104,9 +113,9 @@ extension MainViewController: UITableViewDataSourcePrefetching {
             return
         }
         if isFiltering {
-            presenter.viewDidRequestMoreFilmsByCurrentKeyword()
+            presenter.viewDidRequestFilmsByKeyword(keyword: keyword)
         } else {
-            presenter.viewDidRequestMoreFilms()
+            presenter.viewDidRequestBestFilms()
         }
     }
     func isloadingCell(for indexPath: IndexPath) -> Bool {
@@ -137,7 +146,7 @@ extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text
         else { return }
-        presenter.viewDidRequestFilmsByKeyword(keyword: text)
+        self.keyword = text
     }
 }
 // MARK: - Actions

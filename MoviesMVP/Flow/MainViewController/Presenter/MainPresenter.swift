@@ -12,29 +12,29 @@ protocol MainViewInput: AnyObject {
     var searchResults: [Film] {get set}
 }
 protocol MainViewOutput: AnyObject {
-    func viewDidRequest()
-    func viewDidRequestMoreFilms()
-    func viewDidRequestMoreFilmsByCurrentKeyword()
-    func viewDidRequestFilmsByKeyword(keyword: String)
+    func viewDidRequestBestFilms()
+    func viewDidRequestFilmsByKeyword(keyword: String?)
     func viewDidSelectFilm(_ film: Film)
 }
 class MainPresenter {
-    private var currentKeyword: String?
-    private var currentPage: Int = 2
-    private var maxPageCount: Int = 0
+    private var currentPage: Int = 1
+    private var maxPageCount: Int = 2
+
+    private var currentPageForSearch: Int = 1
+    private var maxPageCountForSearch: Int = 2
     weak var viewInput: (UIViewController & MainViewInput)?
 
-    private let dataFetcherService: DataFetcherService
+    private let requestFactory: RequestFactory
     private let coreDataService: CoreDataService
 
-    init(dataFetcherService: DataFetcherService, coreDataService: CoreDataService) {
+    init(requestFactory: RequestFactory, coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
-        self.dataFetcherService = dataFetcherService
+        self.requestFactory = requestFactory
     }
 
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
-        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
+        let detailVC = DetailBuilder.build(requestFactory: requestFactory,
                                            coreDataService: coreDataService,
                                            with: film)
         viewInput?.navigationController?.pushViewController(detailVC, animated: true)
@@ -43,67 +43,52 @@ class MainPresenter {
 // MARK: - Network requests
 extension MainPresenter {
     // MARK: Request films by keyword
-    private func requestFilmsByKeyword(keyword: String) {
-        dataFetcherService.searchFilmByKeyword(keyword: keyword) {[weak self] result in
-            guard let self = self,
-                  let result = result
-            else {return}
-            self.viewInput?.searchResults = result.films
-            self.maxPageCount = result.pagesCount
-            print(result.pagesCount)
-            self.currentKeyword = result.keyword
-            self.currentPage = 2
+    private func requestFilmsByKeyword(keyword: String?) {
+        guard let keyword = keyword, keyword != "" else {
+            return
         }
-    }
-    private func requestMoreFilmsByCurrentKeyword() {
-        dataFetcherService.searchFilmByKeyword(keyword: currentKeyword ?? "",
-                                               pageNumber: String(currentPage)) { [weak self] result in
+        let filmsByKeywordFactory = requestFactory.makeGetFilmsByKeywordFactory()
+        filmsByKeywordFactory.load(keyword: keyword,
+                                   pageNumber: String(currentPage)) {[weak self] result in
             guard let self = self,
-                  let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
 
-            self.viewInput?.searchResults += result.films
-
-            self.currentPage += 1
+            switch result {
+            case .success(let filmResult):
+                self.viewInput?.searchResults += filmResult.films
+                self.maxPageCountForSearch = filmResult.pagesCount
+                self.currentPage += 1
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     // MARK: Request best 250 films
     private func requestData() {
-        dataFetcherService.fetchBestFilms { [weak self] result in
+        let bestFilmsRequestFactory = requestFactory.makeGetBestFilmsFactory()
+        bestFilmsRequestFactory.load(pageNumber: String(currentPage),
+                                     topType: .best) { [weak self] result in
             guard let self = self,
-                  let result = result
-            else {return}
-            self.viewInput?.results = result.films
-            self.maxPageCount = result.pagesCount
-            self.currentPage = 2
-        }
-    }
-    // MARK: Request more page films
-    private func requestMoreData() {
-        dataFetcherService.fetchBestFilms(pageNumber: String(currentPage)) { [weak self] result in
-            guard let self = self,
-                  let result = result,
                   self.currentPage <= self.maxPageCount
             else {return}
 
-            self.viewInput?.results += result.films
-
-            self.currentPage += 1
+            switch result {
+            case .success(let filmResult):
+                self.maxPageCount = filmResult.pagesCount
+                self.viewInput?.results += filmResult.films
+                self.currentPage += 1
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
 extension MainPresenter: MainViewOutput {
-    func viewDidRequest() {
+    func viewDidRequestBestFilms() {
         requestData()
     }
-    func viewDidRequestMoreFilms() {
-        requestMoreData()
-    }
-    func viewDidRequestMoreFilmsByCurrentKeyword() {
-        requestMoreFilmsByCurrentKeyword()
-    }
-    func viewDidRequestFilmsByKeyword(keyword: String) {
+    func viewDidRequestFilmsByKeyword(keyword: String?) {
         requestFilmsByKeyword(keyword: keyword)
     }
     func viewDidSelectFilm(_ film: Film) {

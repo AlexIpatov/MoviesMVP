@@ -19,22 +19,26 @@ class DetailViewPresenter {
 
     private let transition = PanelTransition()
 
-    private let dataFetcherService: DataFetcherService
+    private let requestFactory: RequestFactory
     private let coreDataService: CoreDataService
 
-    init(dataFetcherService: DataFetcherService,
+    init(requestFactory: RequestFactory,
          coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
-        self.dataFetcherService = dataFetcherService
+        self.requestFactory = requestFactory
     }
     // MARK: - requestData
     private func requestData(filmId: Int) {
-        dataFetcherService.fetchFilmById(id: String(filmId)) { [weak self] result in
-            guard let self = self,
-                  let result = result
-            else {return}
-            self.viewInput?.detailFilmInfo = result
-        }
+//       let detailFactory = requestFactory.makeGetDetailFilmFactory()
+//        detailFactory.load(filmId: filmId) { [weak self] result in
+//            guard let self = self else {return}
+//            switch result {
+//            case .success(let filmResult):
+//                self.viewInput?.detailFilmInfo = filmResult
+//            case .failure(_):
+//                <#code#>
+//            }
+//        }
     }
     // MARK: - Open child VC
     private func openFilmInfoVC(with film: Film) {

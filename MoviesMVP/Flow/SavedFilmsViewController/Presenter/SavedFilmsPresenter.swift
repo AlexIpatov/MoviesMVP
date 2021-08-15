@@ -20,18 +20,18 @@ protocol SavedFilmsViewOutput: AnyObject {
 class SavedFilmsPresenter {
     weak var viewInput: (UIViewController & SavedFilmsViewInput)?
 
-    private let dataFetcherService: DataFetcherService
+    private let requestFactory: RequestFactory
     private let coreDataService: CoreDataService
 
-    init(dataFetcherService: DataFetcherService,
+    init(requestFactory: RequestFactory,
          coreDataService: CoreDataService) {
         self.coreDataService = coreDataService
-        self.dataFetcherService = dataFetcherService
+        self.requestFactory = requestFactory
     }
 
     // MARK: - Open next vc
     private func openFilmDetails(with film: Film) {
-        let detailVC = DetailBuilder.build(dataFetcherService: dataFetcherService,
+        let detailVC = DetailBuilder.build(requestFactory: requestFactory,
                                            coreDataService: coreDataService,
                                            with: film)
         viewInput?.navigationController?.pushViewController(detailVC, animated: true)
@@ -41,11 +41,15 @@ class SavedFilmsPresenter {
 extension SavedFilmsPresenter {
     // MARK: Request 100 popular films
     private func requestData() {
-        dataFetcherService.fetchBestFilms( type: .popular) { [weak self] result in
-            guard let self = self,
-                  let result = result
-            else {return}
-            self.viewInput?.recommendedFilms = result.films
+        let bestFilmsRequestFactory = requestFactory.makeGetBestFilmsFactory()
+        bestFilmsRequestFactory.load(pageNumber: "1", topType: .popular){ [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let filmsResult):
+                self.viewInput?.recommendedFilms = filmsResult.films
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

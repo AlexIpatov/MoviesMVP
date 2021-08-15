@@ -10,24 +10,20 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var dataFetcherService: DataFetcherService?
-    var dataFetcher = NetworkDataFetcher()
-    var coreDataService = CoreDataService()
+    var appStartManager: AppStartManager?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.overrideUserInterfaceStyle = .light
         window?.windowScene = windowScene
-        dataFetcherService = DataFetcherService(networkDataFetcher: dataFetcher)
-        guard let dataFetcherService = dataFetcherService else {
-            return
-        }
-        window?.rootViewController =  MainTabBarController(dataFetcherService: dataFetcherService,
-                                                           coreDataService: coreDataService)
-        window?.makeKeyAndVisible()
+
+        appStartManager = AppStartManager(window: window)
+        appStartManager?.start()
+        ////TESTSSSadxdqSqs/
+       // awdawdawwadawdawd
     }
     func sceneDidEnterBackground(_ scene: UIScene) {
-        coreDataService.saveContext()
+        
+        //coreDataService.saveContext()
     }
 }

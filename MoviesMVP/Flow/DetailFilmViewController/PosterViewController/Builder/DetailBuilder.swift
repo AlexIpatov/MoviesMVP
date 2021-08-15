@@ -8,9 +8,9 @@
 import UIKit
 
 class DetailBuilder {
-    static func build(dataFetcherService: DataFetcherService, coreDataService: CoreDataService,
+    static func build(requestFactory: RequestFactory, coreDataService: CoreDataService,
                       with film: Film) -> (UIViewController & DetailViewInput) {
-        let presenter = DetailViewPresenter(dataFetcherService: dataFetcherService, coreDataService: coreDataService)
+        let presenter = DetailViewPresenter(requestFactory: requestFactory, coreDataService: coreDataService)
         let viewController = PosterViewController(presenter: presenter, film: film)
         presenter.viewInput = viewController
         return viewController

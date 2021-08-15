@@ -48,7 +48,7 @@ class PosterViewController: UIViewController, DetailViewInput {
     }
     // MARK: - Setup film poster
     private func setupFilmPoster() {
-        posterView.configure(with: film.posterURL)
+        posterView.configure(with: film.posterURLPreview)
     }
     private func setupActions() {
         posterView.showVCButton.addTarget(self, action: #selector(showButtonTapped),

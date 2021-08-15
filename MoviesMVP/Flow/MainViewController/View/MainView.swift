@@ -13,7 +13,6 @@ class MainView: UIView {
         let tableView = UITableView()
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.backgroundColor = .white
-        tableView.rowHeight = 70
         tableView.separatorStyle = .singleLine
         tableView.refreshControl = refreshControl
         addSubview(tableView)
